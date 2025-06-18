@@ -145,7 +145,7 @@ async def search_documents(search_query: SearchQuery):
                                 "query": search_query.query,
                                 "fields": ["title^2", "content"],  # title 필드에 2배 가중치
                                 "type": "best_fields",
-                                "fuzziness": "AUTO"
+                                "fuzziness": "AUTO" # <- 퍼지 검색 설정정
                             }
                         }
                     ]
