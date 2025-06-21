@@ -16,6 +16,15 @@ services:
     ports:
      - "9200:9200"  # REST API
      - "9300:9300"  # 클러스터 내부 통신(필요 없으면 제거 가능)
+    command: >
+      /bin/bash -c "
+      if [ ! -f /usr/share/elasticsearch/plugins/analysis-nori/.installed ]; then
+        echo 'Installing Nori plugin...';
+        elasticsearch-plugin install --batch analysis-nori;
+        touch /usr/share/elasticsearch/plugins/analysis-nori/.installed;
+      fi;
+      /usr/local/bin/docker-entrypoint.sh eswrapper
+      "
 
 volumes:
   esdata:
